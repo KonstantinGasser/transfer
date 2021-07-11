@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	defaultPath = "README.md" //"USB-Sticks Anleger-, Neukundeninformation"
+	defaultPath = "USB-Sticks Anleger-, Neukundeninformation"
 )
 
 func main() {
