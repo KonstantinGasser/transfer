@@ -28,4 +28,4 @@
 `./transfer-darwin -concurrent <the-number-of-usb-sticks-you-want-to-process>`
 
 ## Terminate program
-Hit keys `CTR-C`
+Hit keys `CTR-C` (in some cases this can take up to 3 seconds but you will be notified once the progam has stopped)
