@@ -3,6 +3,7 @@
 
 ## Getting Started
 1. Download the ZIP-File from `https://github.com/KonstantinGasser/transfer`
+2. in there you will find two files per operating system (windows and MacOs). The files with the suffix of `-concurrent` process all plugged in USB-Sticks concurrently (these versions can be used to speed up things when using a big USB-Hub - not required for only 2 - 10 sticks unless wanted)
 
 
 ## On Windows
