@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	defaultPath = "data" //"USB-Sticks Anleger-, Neukundeninformation"
+	defaultPath = "USB-Sticks Anleger-, Neukundeninformation"
 )
 
 func main() {
