@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"sync"
 	"time"
 
 	usbdrivedetector "github.com/deepakjois/gousbdrivedetector"
@@ -13,7 +14,7 @@ import (
 )
 
 const (
-	defaultPath = "USB-Sticks Anleger-, Neukundeninformation"
+	defaultPath = "data" //"USB-Sticks Anleger-, Neukundeninformation"
 )
 
 func main() {
@@ -38,15 +39,24 @@ func main() {
 			}
 			if len(devices) == int(*concurrent) {
 				fmt.Printf("[main] device(s) detected - starting processing...\n")
+				var wg sync.WaitGroup
+
 				for _, device := range devices {
 					path := filepath.Join(device, defaultPath)
 					fmt.Printf("[copy] coping data from %q to %q\n", defaultPath, path)
-					if err := copy.Copy(defaultPath, path); err != nil {
-						fmt.Printf("[copy] ERROR: could not copy data to device: %v\n", err)
-						continue
-					}
-					fmt.Printf("[copy] SUCCESS: copied data to device: %q\n", device)
+					wg.Add(1)
+					go func(p string, d string) {
+						defer wg.Done()
+
+						start := time.Now()
+						if err := copy.Copy(defaultPath, p); err != nil {
+							fmt.Printf("[copy] ERROR: could not copy data to device: %v\n", err)
+						}
+						fmt.Printf("[copy] SUCCESS: copied data to device: %q, (in %v seconds)\n", d, time.Since(start).Seconds())
+					}(path, device)
+
 				}
+				wg.Wait()
 				wait(sigs)
 			}
 			time.Sleep(time.Second * 3)
