@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	defaultPath = "USB-Sticks Anleger-, Neukundeninformation"
+	defaultPath = "Zeichnungsdokumente"
 )
 
 func main() {
@@ -51,6 +51,7 @@ func main() {
 						start := time.Now()
 						if err := copy.Copy(defaultPath, p); err != nil {
 							fmt.Printf("[copy] ERROR: could not copy data to device: %v\n", err)
+							return
 						}
 						fmt.Printf("[copy] SUCCESS: copied data to device: %q, (in %v seconds)\n", d, time.Since(start).Seconds())
 					}(path, device)
